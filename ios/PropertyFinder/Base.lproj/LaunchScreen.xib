@@ -18,8 +18,11 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="srceen.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Uez-Kf-u9e">
-                    <rect key="frame" x="121" y="123" width="238" height="314"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="srceen.png" translatesAutoresizingMaskIntoConstraints="NO" id="Uez-Kf-u9e">
+                    <rect key="frame" x="121" y="128.5" width="238" height="315"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="238" id="rIM-1x-RaQ"/>
+                    </constraints>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="搜搜PM2.5" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="kId-c2-rCX">
                     <rect key="frame" x="20" y="39" width="441" height="57.5"/>
@@ -35,6 +38,8 @@
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="8" id="Kzo-t9-V3l"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="MfP-vx-nX0"/>
                 <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="ZEH-qu-HZ9"/>
+                <constraint firstItem="Uez-Kf-u9e" firstAttribute="top" secondItem="kId-c2-rCX" secondAttribute="bottom" constant="32" id="d9V-Vv-kZ7"/>
+                <constraint firstItem="Uez-Kf-u9e" firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="dyN-To-2oD"/>
                 <constraint firstItem="kId-c2-rCX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="fvb-Df-36g"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -43,6 +48,6 @@
         </view>
     </objects>
     <resources>
-        <image name="srceen.jpg" width="768" height="1024"/>
+        <image name="srceen.png" width="236" height="315"/>
     </resources>
 </document>

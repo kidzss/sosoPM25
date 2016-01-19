@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:">
+      location = "self:/Volumes/data/React-Native/sosoPM25/ios/sosoPM2.5.xcodeproj">
    </FileRef>
 </Workspace>

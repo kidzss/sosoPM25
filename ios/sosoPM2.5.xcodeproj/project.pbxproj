@@ -54,6 +54,7 @@
 		4BA113DB1C493D3F008C35A3 /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA113D71C493D3F008C35A3 /* TFHppleElement.m */; };
 		4BA113DC1C493D3F008C35A3 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA113D91C493D3F008C35A3 /* XPathQuery.m */; };
 		4BC7F2AD1C48B48100E398B1 /* UserDefaultManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7F2AC1C48B48100E398B1 /* UserDefaultManage.m */; };
+		4BD47FF21C4E2A3900454237 /* srceen.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BD47FF11C4E2A3900454237 /* srceen.png */; };
 		4BF0CE1E1C476EA000EFBEAE /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BF0CE1D1C476EA000EFBEAE /* libxml2.2.tbd */; };
 		4BF0CE201C476EAE00EFBEAE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BF0CE1F1C476EAE00EFBEAE /* QuartzCore.framework */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
@@ -160,12 +161,12 @@
 		00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTImage.xcodeproj; path = "../node_modules/react-native/Libraries/Image/RCTImage.xcodeproj"; sourceTree = "<group>"; };
 		00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTNetwork.xcodeproj; path = "../node_modules/react-native/Libraries/Network/RCTNetwork.xcodeproj"; sourceTree = "<group>"; };
 		00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTVibration.xcodeproj; path = "../node_modules/react-native/Libraries/Vibration/RCTVibration.xcodeproj"; sourceTree = "<group>"; };
-		00E356EE1AD99517003FC87E /* PropertyFinderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PropertyFinderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* sosoPM2.5Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sosoPM2.5Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* PropertyFinderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PropertyFinderTests.m; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* 搜搜PM2.5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "搜搜PM2.5.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* sosoPM2.5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sosoPM2.5.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = PropertyFinder/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = PropertyFinder/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -212,6 +213,7 @@
 		4BC7F2AB1C48B48100E398B1 /* UserDefaultManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefaultManage.h; sourceTree = "<group>"; };
 		4BC7F2AC1C48B48100E398B1 /* UserDefaultManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaultManage.m; sourceTree = "<group>"; };
 		4BC7F2BB1C48B7E700E398B1 /* MacroUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacroUtils.h; sourceTree = "<group>"; };
+		4BD47FF11C4E2A3900454237 /* srceen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = srceen.png; sourceTree = "<group>"; };
 		4BF0CE1D1C476EA000EFBEAE /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
 		4BF0CE1F1C476EAE00EFBEAE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -289,12 +291,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		00E356EF1AD99517003FC87E /* PropertyFinderTests */ = {
+		00E356EF1AD99517003FC87E /* sosoPM2.5Tests */ = {
 			isa = PBXGroup;
 			children = (
 				00E356F21AD99517003FC87E /* PropertyFinderTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
+			name = sosoPM2.5Tests;
 			path = PropertyFinderTests;
 			sourceTree = "<group>";
 		};
@@ -322,7 +325,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* PropertyFinder */ = {
+		13B07FAE1A68108700A75B9A /* sosoPM2.5 */ = {
 			isa = PBXGroup;
 			children = (
 				4BA113DD1C493D52008C35A3 /* TFHapple */,
@@ -338,7 +341,7 @@
 				4BC7F2AC1C48B48100E398B1 /* UserDefaultManage.m */,
 				4B7529521C4CC6D70087DD35 /* Resources */,
 			);
-			name = PropertyFinder;
+			name = sosoPM2.5;
 			sourceTree = "<group>";
 		};
 		146834001AC3E56700842450 /* Products */ = {
@@ -362,6 +365,7 @@
 			isa = PBXGroup;
 			children = (
 				4B1AC0D21C4DFF1100D81919 /* iTunesArtwork */,
+				4BD47FF11C4E2A3900454237 /* srceen.png */,
 				4B1AC0C41C4DF5B200D81919 /* srceen.jpg */,
 				4B75296E1C4CC72B0087DD35 /* tabbar_contacts@2x.png */,
 				4B75296F1C4CC72B0087DD35 /* tabbar_contacts@3x.png */,
@@ -454,9 +458,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* PropertyFinder */,
+				13B07FAE1A68108700A75B9A /* sosoPM2.5 */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* PropertyFinderTests */,
+				00E356EF1AD99517003FC87E /* sosoPM2.5Tests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 			);
 			indentWidth = 2;
@@ -466,8 +470,8 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* 搜搜PM2.5.app */,
-				00E356EE1AD99517003FC87E /* PropertyFinderTests.xctest */,
+				13B07F961A680F5B00A75B9A /* sosoPM2.5.app */,
+				00E356EE1AD99517003FC87E /* sosoPM2.5Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -475,9 +479,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* PropertyFinderTests */ = {
+		00E356ED1AD99517003FC87E /* sosoPM2.5Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "PropertyFinderTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "sosoPM2.5Tests" */;
 			buildPhases = (
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
@@ -488,14 +492,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = PropertyFinderTests;
+			name = sosoPM2.5Tests;
 			productName = PropertyFinderTests;
-			productReference = 00E356EE1AD99517003FC87E /* PropertyFinderTests.xctest */;
+			productReference = 00E356EE1AD99517003FC87E /* sosoPM2.5Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* PropertyFinder */ = {
+		13B07F861A680F5B00A75B9A /* sosoPM2.5 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "PropertyFinder" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "sosoPM2.5" */;
 			buildPhases = (
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
@@ -506,9 +510,9 @@
 			);
 			dependencies = (
 			);
-			name = PropertyFinder;
+			name = sosoPM2.5;
 			productName = "Hello World";
-			productReference = 13B07F961A680F5B00A75B9A /* 搜搜PM2.5.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* sosoPM2.5.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -526,7 +530,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "PropertyFinder" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "sosoPM2.5" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -585,8 +589,8 @@
 			);
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* PropertyFinder */,
-				00E356ED1AD99517003FC87E /* PropertyFinderTests */,
+				13B07F861A680F5B00A75B9A /* sosoPM2.5 */,
+				00E356ED1AD99517003FC87E /* sosoPM2.5Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -719,6 +723,7 @@
 				4B7529671C4CC6F10087DD35 /* icon@2x.png in Resources */,
 				4B7529851C4CC72B0087DD35 /* tabbar_discoverHL@3x.png in Resources */,
 				4B75297F1C4CC72B0087DD35 /* tabbar_contacts@3x.png in Resources */,
+				4BD47FF21C4E2A3900454237 /* srceen.png in Resources */,
 				4B75298B1C4CC72B0087DD35 /* tabbar_me@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -769,7 +774,7 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* PropertyFinder */;
+			target = 13B07F861A680F5B00A75B9A /* sosoPM2.5 */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -803,8 +808,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PropertyFinder.app/PropertyFinder";
+				PRODUCT_NAME = sosoPM2.5Tests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/sosoPM2.5.app/sosoPM2.5";
 			};
 			name = Debug;
 		};
@@ -821,8 +826,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PropertyFinder.app/PropertyFinder";
+				PRODUCT_NAME = sosoPM2.5Tests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/sosoPM2.5.app/sosoPM2.5";
 			};
 			name = Release;
 		};
@@ -841,8 +846,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "搜搜PM2.5";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.PM2-5";
+				PRODUCT_NAME = sosoPM2.5;
 			};
 			name = Debug;
 		};
@@ -860,8 +865,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "搜搜PM2.5";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.PM2-5";
+				PRODUCT_NAME = sosoPM2.5;
 			};
 			name = Release;
 		};
@@ -955,7 +960,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "PropertyFinderTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "sosoPM2.5Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -964,7 +969,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "PropertyFinder" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "sosoPM2.5" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -973,7 +978,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "PropertyFinder" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "sosoPM2.5" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
