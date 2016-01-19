@@ -1,0 +1,2 @@
+http://m.pm25.com/wap/cities.html   城市选择
+http://m.pm25.com/wap/location.html  获取地址
