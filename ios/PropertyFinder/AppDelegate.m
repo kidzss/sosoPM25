@@ -55,7 +55,7 @@
 //   jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
-                                                      moduleName:@"搜搜PM2.5"
+                                                      moduleName:@"sosoPM2.5"
                                                initialProperties:nil
                                                    launchOptions:launchOptions];
 
@@ -144,7 +144,7 @@
 
 // 进行推送的方法
 // 设置本地推送参数，并进行推送
-- (void)scheduleNotification{
+- (void)scheduleNotification {
   UILocalNotification *notification = [[UILocalNotification alloc] init];
   //设置5秒之后
   NSDate *pushDate = [NSDate dateWithTimeIntervalSinceNow:5];
@@ -249,7 +249,7 @@
     NSInteger month = [conponent month];
     NSInteger day = [conponent day];
     
-    //获得当天的12:00  时间
+    //获得当天的7:30  时间
     NSString *nsStringDate12 = [NSString stringWithFormat:@"%ld-%ld-%ld-%d-%d-%d",
                                 (long)year,(long)month,(long)day,7,30,0];
     
