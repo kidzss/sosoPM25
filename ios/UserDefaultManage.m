@@ -24,8 +24,15 @@ RCT_EXPORT_METHOD(addCityName:(NSString *)name location:(NSString *)location) {
   USER_SET_CONFIG(@"location",location);
 
   dispatch_async(dispatch_get_main_queue(), ^{
-    [sysDege getPm25Html:location];
+    [sysDege scheduledGetPm25Html:location];
   });
 }
+
+//- (void)findEvents:(RCTResponseSenderBlock)callback
+//{
+//  RCT_EXPORT();
+//  NSArray *events = ...
+//  callback(@[[NSNull null], events]);
+//}
 
 @end

@@ -18,5 +18,6 @@
 @property(nonatomic,strong)NSMutableData *receiveData;
 
 - (void)getPm25Html:(NSString*)url;
+- (void)scheduledGetPm25Html:(NSString*)url;
 
 @end

@@ -5,156 +5,126 @@ var {
 	Text,
 	View,
 	ListView,
+	TouchableHighlight,
 	ActivityIndicatorIOS
 } = React;
 
-var Api = require('../../Network/API');
-var TopicListCell = require('../Topic/ListCell');
-var TopicView = require('../Topic/View');
 var SearchPage = require('./SearchPage');
-var PM25COM = SearchPage.PM25COM;
-var pm25Data = SearchPage.pm25Data;
+var PM25COM = 'http://m.pm25.com/wap/city/';
+var pm25Data = require('./cityList');
+
+var WebView = require('./WebView');
 
 var Style = React.StyleSheet.create({
 	container: {
-		backgroundColor: '#eeeeee',
+		backgroundColor: '#E7EAEC',
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
 	listView: {
 		marginTop: 65,
-		marginBottom: 0
+		marginBottom: 50
+	},
+	title: {
+		flex: 1,
+		fontSize: 18,
+		marginBottom: 8,
+		textAlign: 'center',
+	},
+	separator: {
+		height: 1,
+		backgroundColor: '#CCCCCC',
+	},
+	row: {
+		flexDirection: 'row',
+		justifyContent: 'center',
+		padding: 10,
+		backgroundColor: '#E7EAEC',
 	},
 });
 
-
 var CACHE = [];
 
-var TopicList = React.createClass({
+var CityList = React.createClass({
 	getInitialState: function() {
 		return {
 			dataSource: new ListView.DataSource({
 				rowHasChanged: (r1, r2) => r1 !== r2
 			}),
-			loaded: false,
-			loadingPage: 0,
-			currentPage: 0,
 		};
 	},
 	componentDidMount: function() {
-		this.fetchData(1);
+		this.fetchData();
 	},
+
 	cache: function(items) {
-		for (var i in items) {
-			CACHE.push(items[i]);
+		for (var key in items) {
+			CACHE.push(key);
 		}
 	},
-	fetchData: function(page) {
-		console.log('loading page ' + page + '...');
+	fetchData: function() {
+		this.cache(pm25Data);
 
 		this.setState({
-			loaded: false,
-			loadingPage: page
+			dataSource: this.state.dataSource.cloneWithRows(CACHE),
 		});
-
-		var limit = 50;
-		var offset = (page - 1) * limit;
-
-		console.log(Api.HomeTopics(offset, limit));
-		fetch(Api.HomeTopics(offset, limit))
-			.then((response) => {
-				//console.log(response.json());
-				return response.json();
-			})
-			.catch((error) => {
-				React.AlertIOS.alert(
-					'error',
-					'请求失败:' + error.message
-				);
-			})
-			.then((responseData) => {
-				this.cache(responseData.topics);
-
-				console.log('loaded data, page' + page);
-
-				if (responseData.error) {
-					React.AlertIOS.alert(
-						'error',
-						responseData.error
-					);
-				} else {
-					this.setState({
-						dataSource: this.state.dataSource.cloneWithRows(CACHE),
-						loaded: true,
-						currentPage: this.state.currentPage + 1,
-					});
-				}
-			})
-			.done();
 	},
 
 	render: function() {
-		if (this.state.loadingPage == 1 && !this.state.loaded) {
-			return (
-				<View style={{height: 50}}>
-					<ActivityIndicatorIOS color="#356DD0" style={{marginVertical: 30,marginBottom: 30}} />
-				</View>
-			);
-		}
-		return this.renderTopicList();
+		return this.renderCityList();
 	},
 
-	renderFooter: function() {
-		if (this.state.loaded) {
-			return <View style={{marginVertical: 30}} ><Text>...</Text></View>;
-		}
-		return <ActivityIndicatorIOS color="#356DD0"  style={{marginVertical: 30,marginBottom: 30}} />;
+	renderLoadingView: function() {
+		return (
+			<View style={Style.container}>
+        <Text>
+          Loading movies...
+        </Text>
+      </View>
+		);
 	},
 
-	onEndReached: function() {
-		if (!this.state.loaded) {
-			return;
-		}
-		return this.fetchData(this.state.currentPage + 1);
-	},
-
-	renderTopicList: function() {
-		// console.log(this.props);
+	renderCityList: function() {
 		return (
 			<ListView
 			style={Style.listView}
 	        ref="listview"
-	        pageSize={15}
 	        dataSource={this.state.dataSource}
-	        renderFooter={this.renderFooter}
-	        renderRow={this.renderTopicListCell}
-	        onEndReached={this.onEndReached}
+	        renderRow={this._renderRow}
 	        automaticallyAdjustContentInsets={false}
 	        showsVerticalScrollIndicator={false} />
 		);
 	},
 
-	renderTopicListCell: function(data) {
-		return ( < TopicListCell onSelect = {
-				() => this.selectTopic(data)
-			}
-			data = {
-				data
-			}
-			/>
+	_renderRow: function(rowData: string, sectionID: number, rowID: number) {
+		return (
+			<TouchableHighlight onPress={() => this.selectCity(rowID)}>
+        <View>
+          <View style={Style.row}>
+            <Text style={Style.title}>
+              {rowData}
+            </Text>
+          </View>
+          <View style={Style.separator} />
+        </View>
+      </TouchableHighlight>
 		);
 	},
-	selectTopic: function(data) {
+
+	selectCity: function(data) {
+		var city = CACHE[data];
+		var pinyin = pm25Data[city];
+
+		var url = PM25COM + pinyin + '.html';
 		this.props.navigator.push({
-			title: '详细' + (data.replies_count ? '（' + data.replies_count.toString() + '条回复）' : ''),
-			component: TopicView,
+			title: city + "PM2.5详细信息",
+			component: WebView,
 			passProps: {
-				data: data
+				url: url
 			}
 		});
 	},
-
 });
 
-module.exports = TopicList;
+module.exports = CityList;

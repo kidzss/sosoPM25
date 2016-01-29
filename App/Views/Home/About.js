@@ -17,10 +17,16 @@ var Style = React.StyleSheet.create({
     marginTop: 65,
     alignItems: 'center'
   },
+  ad1: {
+    padding: 10,
+    fontSize: 17,
+    fontWeight: 'normal',
+    textAlign: 'left'
+  },
   ad: {
     padding: 10,
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 14,
+    fontWeight: 'normal',
     textAlign: 'left'
   },
   titleTxt: {
@@ -45,12 +51,14 @@ var About = React.createClass({
     return (
       <View style={Style.container}>
         <Text style={Style.titleTxt}>
-          搜搜PM2.5
+          sosoPM2.5
         </Text>
       <Image style={Style.logo} source={require('image!house')}  />
+          <Text style={Style.ad1}>
+            同呼吸共命运，关注健康，关注雾霾，点滴从你我做起。
+          </Text>
           <Text style={Style.ad}>
-            为了学习React-Native做了这个APP,希望大家关注健康.使用了网络资源
-            如有问题请联系:gtzhou16@163.com
+            使用React-Native做了这个APP.使用了网络资源,如有问题联系:gtzhou16@163.com.
           </Text>
       </View>
     );
@@ -68,7 +76,6 @@ var About = React.createClass({
 });
 
 module.exports = About;
-
 
 // <TouchableHighlight onPress={() => this._onPress('gtzhou16@163.com', 'mailto://gtzhou16@163.com')}>
 //           <Text style={Style.link}>

@@ -10,6 +10,8 @@
 #import "AppDelegate.h"
 #import "RCTRootView.h"
 #import "TFHpple.h"
+#import "JX_GCDTimerManager.h"
+#import "MacroUtils.h"
 
 @implementation AppDelegate
 
@@ -31,7 +33,7 @@
    * on the same Wi-Fi network.
    */
 //10.0.0.3  10.1.7.21 172.20.2.223
-  jsCodeLocation = [NSURL URLWithString:@"http://10.1.7.21:8081/index.ios.bundle?platform=ios&dev=true"];
+  jsCodeLocation = [NSURL URLWithString:@"http://172.20.2.173:8081/index.ios.bundle?platform=ios&dev=true"];
   /**
    * OPTION 2
    * Load from pre-bundled file on disk. The static bundle is automatically
@@ -50,10 +52,12 @@
   [[UIApplication sharedApplication] registerForRemoteNotificationTypes:myTypes];
 #endif
   
-  //[self addPm25ScheduleLocalNotification ];  //addPm25ScheduleLocalNotification
+  NSString *location = USER_CONFIG(@"location");
+  if (location&&location.length) {
+    [self scheduledGetPm25Html:location];
+  }
   
-//   jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
-
+  //jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"sosoPM2.5"
                                                initialProperties:nil
@@ -89,25 +93,9 @@
 
 #endif
 
-- (void)pm25LocalNotification {
-  UILocalNotification *notification = [[UILocalNotification alloc] init];
-  
-  if (notification != nil) {//判断系统是否支持本地通知
-    notification.fireDate = [NSDate dateWithTimeIntervalSince1970:120];//本次开启立即执行的周期
-    notification.repeatInterval = kCFCalendarUnitDay;//循环通知的周期
-    notification.timeZone = [NSTimeZone defaultTimeZone];
-    notification.alertBody = @"哇哇哇";//弹出的提示信息
-    notification.applicationIconBadgeNumber = 0; //应用程序的右上角小数字
-    notification.soundName = UILocalNotificationDefaultSoundName;//本地化通知的声音
-    //notification.alertAction = NSLocalizedString(@"美女呀", nil);  //弹出的提示框按钮
-    notification.hasAction = NO;
-    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-  }
-}
-
 // 接收本地推送（AppDelegate.m中添加）
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
-  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"标题" message:notification.alertBody delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:notification.alertTitle message:notification.alertBody delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
   [alert show];
   
   // 图标上的数字减1
@@ -119,57 +107,6 @@
   application.applicationIconBadgeNumber = 0;
 }
 
-- (void)addLocalNotification {
-  //定义本地通知对象
-  UILocalNotification *notification = [[UILocalNotification alloc]init];
-  //设置调用时间
-  notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:10.0];//通知触发的时间，10s以后
-  notification.repeatInterval = 2;//通知重复次数
-  //notification.repeatCalendar=[NSCalendar currentCalendar];//当前日历，使用前最好设置时区等信息以便能够自动同步时间
-  
-  //设置通知属性
-  notification.alertBody = @"最近添加了诸多有趣的特性，是否立即体验？"; //通知主体
-  notification.applicationIconBadgeNumber=1;//应用程序图标右上角显示的消息数
-  notification.alertAction=@"打开应用"; //待机界面的滑动动作提示
-  notification.alertLaunchImage=@"Default";//通过点击通知打开应用时的启动图片,这里使用程序启动图片
-  //notification.soundName=UILocalNotificationDefaultSoundName;//收到通知时播放的声音，默认消息声音
-  notification.soundName=@"msg.caf";//通知声音（需要真机才能听到声音）
-  
-  //设置用户信息
-  notification.userInfo=@{@"id":@1,@"user":@"Kenshin Cui"};//绑定到通知上的其他附加信息
-  
-  //调用通知
-  [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-}
-
-// 进行推送的方法
-// 设置本地推送参数，并进行推送
-- (void)scheduleNotification {
-  UILocalNotification *notification = [[UILocalNotification alloc] init];
-  //设置5秒之后
-  NSDate *pushDate = [NSDate dateWithTimeIntervalSinceNow:5];
-  if (notification != nil) {
-    // 设置推送时间（5秒后）
-    notification.fireDate = pushDate;
-    // 设置时区（此为默认时区）
-    notification.timeZone = [NSTimeZone defaultTimeZone];
-    // 设置重复间隔（默认0，不重复推送）
-    notification.repeatInterval = 0;
-    // 推送声音（系统默认）
-    notification.soundName = UILocalNotificationDefaultSoundName;
-    // 推送内容
-    notification.alertBody = @"推送主体内容";
-    //显示在icon上的数字
-    notification.applicationIconBadgeNumber = 1;
-    //设置userinfo 方便在之后需要撤销的时候使用
-    NSDictionary *info = [NSDictionary dictionaryWithObject:@"name"forKey:@"key"];
-    notification.userInfo = info;
-    //添加推送到UIApplication
-    UIApplication *app = [UIApplication sharedApplication];
-    [app scheduleLocalNotification:notification];
-  }
-}
-
 - (void)getPm25Html:(NSString*)url {
   NSURL *lurl = [NSURL URLWithString:url];
   NSURLRequest *request = [[NSURLRequest alloc]initWithURL:lurl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:2000];
@@ -178,8 +115,15 @@
   NSLog(@"coo %@",connection);
 }
 
-//接收到服务器回应的时候调用此方法
+- (void)scheduledGetPm25Html:(NSString*)url {
+  NSTimeInterval time = [self getMyRepTimeInterval];
+  dispatch_queue_t mainQ = dispatch_get_main_queue();
+  [[JX_GCDTimerManager sharedInstance] scheduledDispatchTimerWithName:@"scGenHtml" timeInterval:time queue:mainQ repeats:YES actionOption:AbandonPreviousAction action:^{
+    [self getPm25Html:url];
+  }];
+}
 
+//接收到服务器回应的时候调用此方法
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
   NSHTTPURLResponse *res = (NSHTTPURLResponse *)response;
   NSLog(@"%@",[res allHeaderFields]);
@@ -213,22 +157,87 @@
     [val addObject:[(NSString*)firstChild.content stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
   }
   
-//  NSString *lblAqi = [NSString stringWithFormat:@"%@ %@",val[0],captionStr[0]];
   NSString *pm25 = [NSString stringWithFormat:@"%@\n%@",captionStr[0],val[0]];
   NSString *tips = [NSString stringWithFormat:@"%@\n%@",captionStr[1],val[1]];
-//  NSString *Pm10 = [NSString stringWithFormat:@"%@ %@",val[2],captionStr[2]];
-//  NSString *Co = [NSString stringWithFormat:@"%@ %@",val[3],captionStr[3]];
   
-//  NSString *lblNo2 = [NSString stringWithFormat:@"%@ %@",val[4],captionStr[4]];
-//  NSString *lblO31 = [NSString stringWithFormat:@"%@ %@",val[5],captionStr[5]];
-//  NSString *lblO38 = [NSString stringWithFormat:@"%@ %@",val[6],captionStr[6]];
-//  NSString *lblSo2 = [NSString stringWithFormat:@"%@ %@",val[7],captionStr[7]];
+  USER_SET_CONFIG(@"pm25",pm25);
+  USER_SET_CONFIG(@"tips",tips);
   
-//  NSString *pollutant = [[[[doc peekAtSearchWithXPathQuery:@"//div[@class='primary_pollutant']/p"] firstChild].content stringByReplacingOccurrencesOfString:@"\n" withString:@""] stringByReplacingOccurrencesOfString:@" " withString:@""];
-//  
-//  NSString *affect = [[[[doc peekAtSearchWithXPathQuery:@"//div[@class='affect']/p"] firstChild].content stringByReplacingOccurrencesOfString:@"\n" withString:@""] stringByReplacingOccurrencesOfString:@" " withString:@""];
-//  
-//  NSString *action = [[[[doc peekAtSearchWithXPathQuery:@"//div[@class='action']/p"] firstChild].content stringByReplacingOccurrencesOfString:@"\n" withString:@""] stringByReplacingOccurrencesOfString:@" " withString:@""];
+  [self addPm25ScheduleLocalNotification:pm25];
+  [self addTipsScheduleLocalNotification:tips];
+}
+
+- (NSTimeInterval)getMyRepTimeInterval {
+  NSTimeInterval myInterval;
+  
+  //现在的时间
+  NSDate *now = [NSDate date];
+  
+  //获得系统日期
+  NSCalendar *cal = [NSCalendar currentCalendar];
+  NSUInteger unitFlags = NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear;
+  NSDateComponents *conponent = [cal components:unitFlags fromDate:now];
+  NSInteger year = [conponent year];
+  NSInteger month = [conponent month];
+  NSInteger day = [conponent day];
+
+    //获得当天的7  时间
+  NSString *nsStringDate = [NSString stringWithFormat:@"%ld-%ld-%ld-%d-%d-%d",
+                     (long)year,(long)month,(long)day,7,0,0];
+  //根据时间字符串获得NSDate
+  NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
+  [dateformatter setDateFormat:@"YYYY-MM-dd-HH-mm-ss"];
+  NSDate *today = [dateformatter dateFromString:nsStringDate];
+  
+  //然后比较  now跟  todayTwelve那个大，如果已经过了7点，那就设置明天7点
+  //NSComparisonResult dateResult = [now compare:today];
+  NSTimeInterval ss = [today timeIntervalSinceDate:now];
+  myInterval = [[today dateByAddingTimeInterval: (24 * 60 * 60 + ss)] timeIntervalSinceNow];
+
+  return myInterval;
+}
+
+- (NSDate*)getMyFireDate:(BOOL)pm {
+  NSDate *myDate;
+  
+  //现在的时间
+  NSDate *now = [NSDate date];
+  
+  //获得系统日期
+  NSCalendar *cal = [NSCalendar currentCalendar];
+  NSUInteger unitFlags = NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear;
+  NSDateComponents *conponent = [cal components:unitFlags fromDate:now];
+  NSInteger year = [conponent year];
+  NSInteger month = [conponent month];
+  NSInteger day = [conponent day];
+  
+  NSString *nsStringDate12;
+  
+  if (pm) {
+    //获得当天的7:30  时间
+    nsStringDate12 = [NSString stringWithFormat:@"%ld-%ld-%ld-%d-%d-%d",
+                      (long)year,(long)month,(long)day,7,30,0];
+  } else {
+    //获得当天的7:30  时间
+    nsStringDate12 = [NSString stringWithFormat:@"%ld-%ld-%ld-%d-%d-%d",
+                      (long)year,(long)month,(long)day,7,35,0];
+  }
+
+  //根据时间字符串获得NSDate
+  NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
+  [dateformatter setDateFormat:@"YYYY-MM-dd-HH-mm-ss"];
+  NSDate *todayTwelve = [dateformatter dateFromString:nsStringDate12];
+  
+  //然后比较  now跟  todayTwelve那个大，如果已经过了12点，那就设置明天12点
+  NSComparisonResult dateResult = [now compare:todayTwelve];
+  if (dateResult == NSOrderedDescending) {
+    NSDate  *  tomorrowTwelve = [todayTwelve dateByAddingTimeInterval: 24 * 60 * 60];
+    myDate =  tomorrowTwelve;
+  } else {
+    myDate = todayTwelve;
+  }
+
+  return myDate;
 }
 
 - (void)addPm25ScheduleLocalNotification:(NSString*)pushStr {
@@ -238,40 +247,42 @@
   //启动本地通知
   UILocalNotification *notification = [[UILocalNotification alloc] init];
   if (notification != nil) {
-    //现在的时间
-    NSDate *now = [NSDate date];
-    
-    //获得系统日期
-    NSCalendar *cal = [NSCalendar currentCalendar];
-    NSUInteger unitFlags = NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear;
-    NSDateComponents *conponent = [cal components:unitFlags fromDate:now];
-    NSInteger year = [conponent year];
-    NSInteger month = [conponent month];
-    NSInteger day = [conponent day];
-    
-    //获得当天的7:30  时间
-    NSString *nsStringDate12 = [NSString stringWithFormat:@"%ld-%ld-%ld-%d-%d-%d",
-                                (long)year,(long)month,(long)day,7,30,0];
-    
-    //根据时间字符串获得NSDate
-    NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
-    [dateformatter setDateFormat:@"YYYY-MM-dd-HH-mm-ss"];
-    NSDate *todayTwelve = [dateformatter dateFromString:nsStringDate12];
-    
-    //然后比较  now跟  todayTwelve那个大，如果已经过了12点，那就设置明天12点
-    NSComparisonResult dateResult = [now compare:todayTwelve];
-    if (dateResult == NSOrderedDescending) {
-      NSDate  *  tomorrowTwelve = [todayTwelve dateByAddingTimeInterval: 24 * 60 * 60];
-      notification.fireDate =  tomorrowTwelve;
-    } else {
-      notification.fireDate= todayTwelve;
-    }
-    
+    notification.fireDate = [self getMyFireDate:YES];
     notification.repeatInterval = kCFCalendarUnitDay;
     notification.timeZone = [NSTimeZone defaultTimeZone];
     notification.applicationIconBadgeNumber = 1;
+    NSArray *strArr = [pushStr componentsSeparatedByString:@"\n"];
+    if ([strArr count]) {
+      notification.alertTitle = strArr[0];
+      notification.alertBody = strArr[1];
+    } else {
+      notification.alertBody = pushStr;
+    }
+
+    notification.alertAction = @"打开";
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+  }
+}
+
+- (void)addTipsScheduleLocalNotification:(NSString*)pushStr {
+  [[UIApplication sharedApplication] cancelAllLocalNotifications];
+  //清空 icon数量
+  [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+  //启动本地通知
+  UILocalNotification *notification = [[UILocalNotification alloc] init];
+  if (notification != nil) {
+    notification.fireDate = [self getMyFireDate:NO];
+    notification.repeatInterval = kCFCalendarUnitDay;
+    notification.timeZone = [NSTimeZone defaultTimeZone];
+    notification.applicationIconBadgeNumber = 1;
+    NSArray *strArr = [pushStr componentsSeparatedByString:@"\n"];
+    if ([strArr count]) {
+      notification.alertTitle = strArr[0];
+      notification.alertBody = strArr[1];
+    } else {
+      notification.alertBody = pushStr;
+    }
     
-    notification.alertBody = pushStr;
     notification.alertAction = @"打开";
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
   }

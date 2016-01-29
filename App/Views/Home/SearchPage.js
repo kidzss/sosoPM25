@@ -2,6 +2,8 @@
 
 var React = require('react-native');
 var WebView = require('./WebView');
+var pm25Data = require('./cityList');
+
 var cityUrl;
 var {
 	StyleSheet,
@@ -18,200 +20,6 @@ var DEFAULT_MAP_URL = 'http://maps.google.com/maps/api/geocode/json?sensor=true_
 var UserDefaultManage = require('NativeModules').UserDefaultManage;
 
 var PM25COM = 'http://m.pm25.com/wap/city/';
-var pm25Data = {
-	"葫芦岛": "huludao",
-	"泉州": "quanzhou",
-	"赤峰": "chifeng",
-	"营口": "yingkou",
-	"大连": "dalian",
-	"瓦房店": "wafangdian",
-	"厦门": "xiamen",
-	"湛江": "zhanjiang",
-	"盘锦": "panjin",
-	"海口": "haikou",
-	"蓬莱": "penglai",
-	"吉林": "jilin",
-	"汕头": "shantou",
-	"福州": "fuzhou",
-	"大庆": "daqing",
-	"三亚": "sanya",
-	"锦州": "jinzhou",
-	"梅州": "meizhou",
-	"深圳": "shenzhen",
-	"舟山": "zhoushan",
-	"秦皇岛": "qinhuangdao",
-	"肇庆": "zhaoqing",
-	"烟台": "yantai",
-	"哈尔滨": "haerbin",
-	"承德": "chengde",
-	"齐齐哈尔": "qiqihaer",
-	"中山": "zhongshan",
-	"珠海": "zhuhai",
-	"阳江": "yangjiang",
-	"玉溪": "yuxi",
-	"西宁": "xining",
-	"台州": "taizhou",
-	"潮州": "chaozhou",
-	"宁波": "ningbo",
-	"荣成": "rongcheng",
-	"乳山": "rushan",
-	"张家口": "zhangjiakou",
-	"抚顺": "fushun",
-	"东莞": "dongguan",
-	"泰安": "taian",
-	"沈阳": "shenyang",
-	"莱州": "laizhou",
-	"云浮": "yunfu",
-	"文登": "wendeng",
-	"本溪": "benxi",
-	"河源": "heyuan",
-	"汕尾": "shanwei",
-	"威海": "weihai",
-	"揭阳": "jieyang",
-	"温州": "wenzhou",
-	"清远": "qingyuan",
-	"平度": "pingdu",
-	"曲靖": "qujing",
-	"惠州": "huizhou",
-	"北海": "beihai",
-	"昆明": "kunming",
-	"茂名": "maoming",
-	"德州": "dezhou",
-	"鞍山": "anshan",
-	"招远": "zhaoyuan",
-	"宝鸡": "baoji",
-	"滨州": "binzhou",
-	"银川": "yinchuan",
-	"廊坊": "langfang",
-	"北京": "beijing",
-	"呼和浩特": "huhehaote",
-	"丹东": "dandong",
-	"长春": "changchun",
-	"青岛": "qingdao",
-	"金昌": "jinchang",
-	"即墨": "jimo",
-	"盐城": "yancheng",
-	"大同": "datong",
-	"韶关": "shaoguan",
-	"莱西": "laixi",
-	"洛阳": "luoyang",
-	"长治": "changzhi",
-	"上海": "shanghai",
-	"开封": "kaifeng",
-	"库尔勒": "kuerle",
-	"重庆": "chongqing",
-	"克拉玛依": "kelamayi",
-	"嘉峪关": "jiayuguan",
-	"柳州": "liuzhou",
-	"咸阳": "xianyang",
-	"莱芜": "laiwu",
-	"天津": "tianjin",
-	"太原": "taiyuan",
-	"石家庄": "shijiazhuang",
-	"济宁": "jining",
-	"包头": "baotou",
-	"宜宾": "yibin",
-	"淄博": "zibo",
-	"乌鲁木齐": "wulumuqi",
-	"泸州": "luzhou",
-	"自贡": "zigong",
-	"唐山": "tangshan",
-	"海门": "haimen",
-	"江门": "jiangmen",
-	"贵阳": "guiyang",
-	"章丘": "zhangqiu",
-	"邢台": "xingtai",
-	"鄂尔多斯": "eerduosi",
-	"广州": "guangzhou",
-	"阳泉": "yangquan",
-	"牡丹江": "mudanjiang",
-	"三门峡": "sanmenxia",
-	"南宁": "nanning",
-	"吴江": "wujiang",
-	"西安": "xian",
-	"石嘴山": "shizuishan",
-	"铜川": "tongchuan",
-	"攀枝花": "panzhihua",
-	"佛山": "foshan",
-	"荆州": "jingzhou",
-	"胶州": "jiaozhou",
-	"枣庄": "zaozhuang",
-	"平顶山": "pingdingshan",
-	"胶南": "jiaonan",
-	"兰州": "lanzhou",
-	"遵义": "zunyi",
-	"保定": "baoding",
-	"昆山": "kunshan",
-	"丽水": "lishui",
-	"常熟": "changshu",
-	"太仓": "taicang",
-	"徐州": "xuzhou",
-	"寿光": "shouguang",
-	"绵阳": "mianyang",
-	"东营": "dongying",
-	"渭南": "weinan",
-	"济南": "jinan",
-	"延安": "yanan",
-	"焦作": "jiaozuo",
-	"郑州": "zhengzhou",
-	"安阳": "anyang",
-	"南通": "nantong",
-	"邯郸": "handan",
-	"潍坊": "weifang",
-	"成都": "chengdu",
-	"张家界": "zhangjiajie",
-	"衢州": "quzhou",
-	"衡水": "hengshui",
-	"临汾": "linfen",
-	"聊城": "liaocheng",
-	"嘉兴": "jiaxing",
-	"宜昌": "yichang",
-	"菏泽": "heze",
-	"桂林": "guilin",
-	"江阴": "jiangyin",
-	"张家港": "zhangjiagang",
-	"常德": "changde",
-	"宿迁": "suqian",
-	"岳阳": "yueyang",
-	"长沙": "changsha",
-	"南充": "nanchong",
-	"杭州": "hangzhou",
-	"湘潭": "xiangtan",
-	"沧州": "cangzhou",
-	"拉萨": "lasa",
-	"常州": "changzhou",
-	"宜兴": "yixing",
-	"苏州": "suzhou",
-	"株洲": "zhuzhou",
-	"南昌": "nanchang",
-	"无锡": "wuxi",
-	"淮安": "huaian",
-	"富阳": "fuyang",
-	"绍兴": "shaoxing",
-	"临沂": "linyi",
-	"湖州": "huzhou",
-	"九江": "jiujiang",
-	"泰州": "taizhoushi",
-	"日照": "rizhao",
-	"溧阳": "liyang",
-	"德阳": "deyang",
-	"临安": "linan",
-	"连云港": "lianyungang",
-	"金华": "jinhua",
-	"义乌": "yiwu",
-	"芜湖": "wuhu",
-	"诸暨": "zhuji",
-	"马鞍山": "maanshan",
-	"金坛": "jintan",
-	"武汉": "wuhan",
-	"镇江": "zhenjiang",
-	"南京": "nanjing",
-	"扬州": "yangzhou",
-	"句容": "jurong",
-	"合肥": "hefei",
-	"Santa Clara County": "hefei",
-	"圣克拉拉": "hefei"
-}
 
 var styles = StyleSheet.create({
 	description1: {
@@ -275,8 +83,8 @@ function urlForQueryAndPage(key, value) {
 	if (key === 'place_name') {
 		var querystring = pm25Data[value];
 		if (querystring) {
-			querystring = PM25COM+querystring+'.html';
-			console.log('querystring = ' + querystring +' '+ querystring.length);
+			querystring = PM25COM + querystring + '.html';
+			console.log('querystring = ' + querystring + ' ' + querystring.length);
 			if (querystring.length > 19) {
 				return querystring;
 			} else {
@@ -293,7 +101,6 @@ function urlForQueryAndPage(key, value) {
 };
 
 class SearchPage extends Component {
-
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -324,7 +131,7 @@ class SearchPage extends Component {
 		if (city && city.length) {
 			console.log(city);
 			cityUrl = pm25Data[city];
-			cityUrl = PM25COM+cityUrl+'.html';
+			cityUrl = PM25COM + cityUrl + '.html';
 			console.log(cityUrl);
 			if (cityUrl && cityUrl.length) {
 				this._executeQuery(cityUrl);
@@ -333,7 +140,7 @@ class SearchPage extends Component {
 			this.setState({
 				message: 'Location not recognized; please try again.'
 			});
-			alert("没有找到输入的城市数据");
+			React.AlertIOS.alert("提示", "没有找到输入的城市数据");
 		}
 	}
 
@@ -403,9 +210,9 @@ class SearchPage extends Component {
 		navigator.geolocation.getCurrentPosition(
 			location => {
 				var search = location.coords.latitude + ',' + location.coords.longitude;
-				console.log('search' + search);
+				//console.log('search' + search);
 				this.setState({
-					searchString: search
+					searchString: ''
 				});
 				var query = urlForQueryAndPage('centre_point', search);
 				console.log('location ' + query);
@@ -415,7 +222,7 @@ class SearchPage extends Component {
 				this.setState({
 					message: 'There was a problem with obtaining your locaton: ' + error
 				});
-				alert("获取位置信息失败！");
+				React.AlertIOS.alert("提示", "获取位置信息失败！");
 			});
 	}
 
