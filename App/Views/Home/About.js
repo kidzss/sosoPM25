@@ -20,6 +20,7 @@ var Style = React.StyleSheet.create({
   ad1: {
     padding: 10,
     fontSize: 17,
+    color: 'blue',
     fontWeight: 'normal',
     textAlign: 'left'
   },
@@ -58,7 +59,7 @@ var About = React.createClass({
             同呼吸共命运，关注健康，关注雾霾，点滴从你我做起。
           </Text>
           <Text style={Style.ad}>
-            使用React-Native做了这个APP.使用了网络资源,如有问题联系:gtzhou16@163.com.
+            使用React-Native做了这个APP使用了网络资源,如有问题联系:gtzhou16@163.com.
           </Text>
       </View>
     );

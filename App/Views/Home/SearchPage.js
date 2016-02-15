@@ -82,15 +82,18 @@ function urlForQueryAndPage(key, value) {
 	console.log('key=' + key + value);
 	if (key === 'place_name') {
 		var querystring = pm25Data[value];
-		if (querystring) {
+		if (querystring && querystring.length) {
 			querystring = PM25COM + querystring + '.html';
 			console.log('querystring = ' + querystring + ' ' + querystring.length);
 			if (querystring.length > 19) {
 				return querystring;
 			} else {
+				React.AlertIOS.alert("提示", "没有找到输入的城市数据");
 				return '';
 			}
-		};
+		} else {
+			React.AlertIOS.alert("提示", "没有找到输入的城市数据");
+		}
 	} else if (key === 'centre_point') {
 		var murl = DEFAULT_MAP_URL + value;
 		console.log('murl=' + murl);
@@ -131,15 +134,16 @@ class SearchPage extends Component {
 		if (city && city.length) {
 			console.log(city);
 			cityUrl = pm25Data[city];
-			cityUrl = PM25COM + cityUrl + '.html';
-			console.log(cityUrl);
 			if (cityUrl && cityUrl.length) {
-				this._executeQuery(cityUrl);
+				cityUrl = PM25COM + cityUrl + '.html';
+				console.log(cityUrl);
+				if (cityUrl && cityUrl.length) {
+					this._executeQuery(cityUrl);
+				}
+			} else {
+				React.AlertIOS.alert("提示", "没有找到输入的城市数据");
 			}
 		} else {
-			this.setState({
-				message: 'Location not recognized; please try again.'
-			});
 			React.AlertIOS.alert("提示", "没有找到输入的城市数据");
 		}
 	}

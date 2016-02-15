@@ -1,21 +1,17 @@
 'use strict';
 var React = require('react-native');
-//var TabNavigator = require('./node_modules/react-native/node_modules/react-native-tab-navigator');
-//import TabNavigator from './node_modules/react-native/node_modules/react-native-tab-navigator';
+var TabNavigator = require('./node_modules/react-native/node_modules/react-native-tab-navigator');
+// import TabNavigator from './node_modules/react-native/node_modules/react-native-tab-navigator';
 var {
     AppRegistry,
     StyleSheet,
     Text,
-    Image,
     View,
     TabBarIOS,
     NavigatorIOS,
 } = React;
 
-var SearchPage = require('./App/Views/Home/SearchPage');
-var Nodes = require('./App/Views/Home/Home');
-var About = require('./App/Views/Home/About');
-
+// var SearchPage = require('./SearchPage');
 var styles = React.StyleSheet.create({
     text: {
         color: 'black',
@@ -61,7 +57,7 @@ var PropertyFinderApp = React.createClass({
                     tintColor={'#333344'}
                     initialRoute={{
                       title: '搜搜PM2.5',
-                      component: SearchPage
+                      component: require('./App/Views/Home/SearchPage')
                     }}
                     itemWrapperStyle={styles.navigator} />
             </TabBarIOS.Item>
@@ -70,17 +66,18 @@ var PropertyFinderApp = React.createClass({
                 selected={this.state.selectedTab === 'nodes'}
                 title="城市信息"
                 name="nodes"
-                icon={require('image!tabbar_me')}
+                icon={require('image!tabbar_mainframe')}
                 onPress={() => {
                     this.setState({
                       selectedTab: 'nodes'
                     });
                 }}>
+
                 <NavigatorIOS style={styles.container}
                     tintColor={'#333344'}
                     initialRoute={{
                       title: '城市信息',
-                      component: Nodes
+                      component: require('./App/Views/Home/Nodes')
                     }}
                     itemWrapperStyle={styles.navigator} />
 
@@ -89,27 +86,29 @@ var PropertyFinderApp = React.createClass({
                 selected={this.state.selectedTab === 'about'}
                 title="关于"
                 name="about"
-                icon={require('image!tabbar_mainframe')}
-                //selectedIcon={{uri:'tabbarHL'}}
+                icon={require('image!tabbar_me')}
+                selectedIcon={{uri:'tabbarHL'}}
                 onPress={() => {
                     this.setState({
                       selectedTab: 'about'
                     });
                 }}>
+
                 <NavigatorIOS style={styles.container}
                     tintColor={'#333344'}
                     initialRoute={{
                       title: '关于',
-                      component: About
+                      component: require('./App/Views/Home/About')
                     }}
                     itemWrapperStyle={styles.navigator} />
+
             </TabBarIOS.Item>
         </TabBarIOS>
         );
     }
 });
 
-AppRegistry.registerComponent('sosoPM2.5', () => PropertyFinderApp);
+AppRegistry.registerComponent('PropertyFinder', () => PropertyFinderApp);
 
 // class PropertyFinderApp extends React.Component {
 // 	render() {

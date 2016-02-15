@@ -16,7 +16,6 @@ var DISABLED_WASH = 'rgba(255,255,255,0.25)';
 
 var TEXT_INPUT_REF = 'urlInput';
 var WEBVIEW_REF = 'webview';
-var DEFAULT_URL = 'http://www.pm25.in/shanghai';
 
 var WebViewExample = React.createClass({
 
