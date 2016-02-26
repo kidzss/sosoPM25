@@ -115,15 +115,16 @@ var CityList = React.createClass({
 	selectCity: function(data) {
 		var city = CACHE[data];
 		var pinyin = pm25Data[city];
-
-		var url = PM25COM + pinyin + '.html';
-		this.props.navigator.push({
-			title: city + "PM2.5详细信息",
-			component: WebView,
-			passProps: {
-				url: url
-			}
-		});
+		if (pinyin != 'undefined') {
+			var url = PM25COM + pinyin + '.html';
+			this.props.navigator.push({
+				title: city + "PM2.5详细信息",
+				component: WebView,
+				passProps: {
+					url: url
+				}
+			});
+		}
 	},
 });
 

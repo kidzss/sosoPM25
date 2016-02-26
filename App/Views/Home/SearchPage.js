@@ -115,16 +115,19 @@ class SearchPage extends Component {
 
 	onSearchTextChanged(event) {
 		console.log('onSearchTextChanged');
+		var searchStr = event.nativeEvent.text.replace('市', '');
 		this.setState({
-			searchString: event.nativeEvent.text
+			searchString: searchStr
 		});
 		console.log(this.state.searchString);
 	}
 
 	_handleResponse(results) {
 		var address_components = results[3].address_components[0];
-		var city = address_components['long_name'];
-
+		var cityStr = address_components['long_name'];
+		console.log('cityStr' + cityStr);
+		var city = cityStr.replace('市', '');
+		console.log('city' + city);
 		this.setState({
 			searchString: city,
 			isLoading: false,
@@ -215,9 +218,9 @@ class SearchPage extends Component {
 			location => {
 				var search = location.coords.latitude + ',' + location.coords.longitude;
 				//console.log('search' + search);
-				this.setState({
-					searchString: ''
-				});
+				// this.setState({
+				// 	searchString: ''
+				// });
 				var query = urlForQueryAndPage('centre_point', search);
 				console.log('location ' + query);
 				this._executeLocationAddress(query);

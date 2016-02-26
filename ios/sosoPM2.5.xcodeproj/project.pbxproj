@@ -531,7 +531,11 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = DTB8Z8L9CL;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = JZXY8F9GSU;
 					};
 				};
 			};
@@ -802,7 +806,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -816,7 +821,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = sosoPM2.5Tests;
-				PROVISIONING_PROFILE = "4fb9b87e-7ad3-4b9a-9f9b-abfeec7c2048";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/sosoPM2.5.app/sosoPM2.5";
 			};
 			name = Debug;
@@ -825,7 +830,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -836,7 +842,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = sosoPM2.5Tests;
-				PROVISIONING_PROFILE = "4fb9b87e-7ad3-4b9a-9f9b-abfeec7c2048";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/sosoPM2.5.app/sosoPM2.5";
 			};
 			name = Release;
@@ -861,7 +867,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gtzhou.sosoPM25;
 				PRODUCT_NAME = sosoPM2.5;
-				PROVISIONING_PROFILE = "4fb9b87e-7ad3-4b9a-9f9b-abfeec7c2048";
+				PROVISIONING_PROFILE = "50506e90-0c1b-4774-9391-1dce3260aed6";
 			};
 			name = Debug;
 		};
@@ -884,7 +890,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gtzhou.sosoPM25;
 				PRODUCT_NAME = sosoPM2.5;
-				PROVISIONING_PROFILE = "4fb9b87e-7ad3-4b9a-9f9b-abfeec7c2048";
+				PROVISIONING_PROFILE = "50506e90-0c1b-4774-9391-1dce3260aed6";
 			};
 			name = Release;
 		};
@@ -932,7 +938,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "4fb9b87e-7ad3-4b9a-9f9b-abfeec7c2048";
+				PROVISIONING_PROFILE = "50506e90-0c1b-4774-9391-1dce3260aed6";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -973,7 +979,7 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "4fb9b87e-7ad3-4b9a-9f9b-abfeec7c2048";
+				PROVISIONING_PROFILE = "50506e90-0c1b-4774-9391-1dce3260aed6";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
